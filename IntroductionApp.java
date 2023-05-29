@@ -17,14 +17,30 @@ public class IntroductionApp{
 			{1,1.9,1,1,1.1},
 		};
 		Scanner sc= new Scanner(System.in);
-		System.out.println("名前を入力してください>>");
+		System.out.print("名前を入力してください>>");
 		String name = sc.nextLine();
 		int seed = calcSeed(name);
 		int[] maxArr={100,100,50,50,50};
 		int[] status = makeStatus(seed,maxArr);
 		System.out.println("初期ステータスが決定しました");
 		showStatus(status,params);
-		//System.out.println("種族を選んでください 0...人間,1...ハイエルフ,2...トロル,3...ノーム");
+		System.out.printf("種族を選んでください%s>",arrToString(races));
+		int race = sc.nextInt();
+		System.out.println(races[race]+"のボーナスが適用されました!");
+		raceBonus(status,raceMatrix[race]);
+		showStatus(status,params);
+		System.out.printf("職業を選んでください%s>",arrToString(classes));
+		int cls = sc.nextInt();
+		System.out.println(classes[cls]+"のボーナスが適用されました!");
+		classBonus(status,classMatrix[cls]);
+		showStatus(status,params);
+		System.out.println("***作成成功!***");
+		System.out.printf("私は%sの%s、%sです。%n",classes[cls],races[race],name);
+		System.out.println("能力値(" + sumStatus(status)+")");
+		for(int i =0;i<status.length;i++){
+			System.out.printf("%s:%d%n",params[i],status[i]);
+		}
+			System.out.println("です。今後ともよろしく...");
 	}
 	static int calcSeed(String name){
 		//seed(種)
@@ -67,5 +83,15 @@ public class IntroductionApp{
 			str += params[i] + ":" +status[i]+" ";
 		}
 		System.out.println("[" + str + "]");
+	}
+	static String arrToString(String[] arr){
+		String str = "";
+		for(int i=0;i<arr.length;i++){
+			//str += i + "..." +arr[i]+",";
+			str += String.format("%d...%s>",i,arr[i]);
+		}
+		//最後の,削除
+		str = str.substring(0,str.length()-1);
+		return str;
 	}
 }
