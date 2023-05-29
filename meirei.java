@@ -18,5 +18,9 @@ public class meirei{
 		//配列の内容を表示
 		int[] arr = {3,5,7};
 		System.out.println(Arrays.toString(arr));
+		
+		//部分文字列の作成
+		//文字列.substring(以上,未満)
+		String s = "Java".substring(0,2);//Ja
 	}
 }
